@@ -14,13 +14,13 @@ exports.dogcat = function(req, res){
 exports.dogcat_judge = function(req, res){
   const visual_recognition = new VisualRecognitionV3({
     version: '2019-12-06',
-    authenticator: new IamAuthenticator({ apikey: '-XSh8cdqrK4iMLh_FiOWj1Vi9VlbonUadLFSG6YQWaF8' }),
+    authenticator: new IamAuthenticator({ apikey: '' }),
   });
 
   var params = {
     imagesFile: fs.createReadStream(req.file.path),
     // owners: ['me'],
-    classifierIds: ['DogorCat_1001057467'],
+    classifierIds: [''],
     // threshold: '0.2'
   };
 

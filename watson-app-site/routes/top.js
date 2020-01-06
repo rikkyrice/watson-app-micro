@@ -6,8 +6,8 @@ const jimp = require('jimp');
 
 exports.sample_site = function(req, res){
   var vr_credentials = {
-    "apikey": "-XSh8cdqrK4iMLh_FiOWj1Vi9VlbonUadLFSG6YQWaF8",
-    "url": "https://api.us-south.visual-recognition.watson.cloud.ibm.com/instances/c3bc8378-fc5a-4314-956d-120c44d8a494"
+    "apikey": "",
+    "url": ""
   };
 
   res.render('top/sample_site.ejs');
@@ -91,7 +91,7 @@ exports.sample_site = function(req, res){
       var params = {
         imagesFile: data,
         // owners: ['me'],
-        classifierIds: 'RecognizeFurnitures_466782234',
+        classifierIds: '',
         threshold: threshold
       };
 

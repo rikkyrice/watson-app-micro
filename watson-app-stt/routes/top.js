@@ -9,8 +9,8 @@ exports.text_to_speech = function(req, res){
 
 exports.word_relay = function(req, res){
   var stt_credentials = {
-    "apikey": "xy_ps7BYE07pJeAlPx_IBtXbKoqjvnvKOl9zfKUpQ5Kh",
-    "url": "https://gateway-tok.watsonplatform.net/speech-to-text/api"
+    "apikey": "",
+    "url": ""
   };
   res.render('top/word_relay.ejs');
 
@@ -56,7 +56,7 @@ exports.word_relay = function(req, res){
               'Content-Type': `application/x-www-form-urlencoded`,
           },
           data: {
-              app_id: `fc273996cbea3e7b9a56a27a9a4617cb9163f60b087ebc9f6e642e487eb17ec9`,
+              app_id: ``,
               sentence: data,
               output_type: `hiragana`
           }

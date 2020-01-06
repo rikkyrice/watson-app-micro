@@ -8,10 +8,10 @@ exports.watson_machine_learning = function(req, res){
 
 exports.calculator = function(req, res){
     var wml_credentials = {
-      "apikey": "hPdBkHuSdADCBxwZLj2s0QMcvaIlw-M1F1fZIZ0dWVHJ",
-      "instance_id": "3f99eea0-673d-49d4-a8be-5913997922c0"
+      "apikey": "",
+      "instance_id": ""
     };
-    var function_deployment_endpoint_url = "https://jp-tok.ml.cloud.ibm.com/v3/wml_instances/3f99eea0-673d-49d4-a8be-5913997922c0/deployments/e54f8b6c-29cc-4e26-8212-e1b38108a55a/online";
+    var function_deployment_endpoint_url = "";
 
     res.render('top/calc.ejs');
 
