@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: watson-app-ingress
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: watson-app-rikkyrice.work
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: watson-app-top-service
+          servicePort: 8080
+      - path: /visual_recognition
+        backend:
+          serviceName: watson-app-vr-service
+          servicePort: 8080
+      - path: /text_to_speech
+        backend:
+          serviceName: watson-app-stt-service
+          servicePort: 8080
+      - path: /watson_machine_learning
+        backend:
+          serviceName: watson-app-ml-service
+          servicePort: 8080
+      - path: /sample_site
+        backend:
+          serviceName: watson-app-site-service
+          servicePort: 8080

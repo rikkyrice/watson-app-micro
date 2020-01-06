@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watson-app-site-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: watson-app-site
+  template:
+    metadata:
+      labels:
+        app: watson-app-site
+    spec:
+      containers:
+      - name: watson-app-site
+        image: rikkyrice/watson-app-site:0.9
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: watson-app-site-service
+spec:
+  selector:
+    app: watson-app-site
+  ports:
+  - protocol: TCP
+    port: 8080

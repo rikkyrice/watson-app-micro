@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watson-app-top-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watson-app-top
+  template:
+    metadata:
+      labels:
+        app: watson-app-top
+    spec:
+      containers:
+      - name: watson-app-top
+        image: rikkyrice/watson-app-top:0.9
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: watson-app-top-service
+spec:
+  type: NodePort
+  selector:
+    app: watson-app-top
+  ports:
+  - name: webserver
+    protocol: TCP
+    port: 8080

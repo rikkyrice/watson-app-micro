@@ -1,0 +1,22 @@
+{
+	"name": "NodejsStarterApp",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"express": "4.15.x",
+		"axios": "^0.19.0",
+		"ejs": "^3.0.1",
+		"ibm-cloud-env": "^0.2.6",
+		"ibm-watson": "^5.2.0",
+		"morgan": "^1.9.1",
+		"recorderjs": "^1.0.1",
+		"socket.io": "^2.3.0"
+	},
+	"repository": {},
+	"engines": {
+		"node": "10.*"
+	}
+}

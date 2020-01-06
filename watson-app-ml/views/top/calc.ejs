@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href="/watson_machine_learning/stylesheets/watson_machine_learning/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/watson_machine_learning/javascripts/watson_machine_learning/javascript.js"></script>
+    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+  </head>
+  <body>
+
+    <script>
+
+    //var socket = io.connect( 'https://app-name.mybluemix.net/' );
+    var socket = io.connect();
+
+    socket.on( 'processresult', processresultHandler );
+
+    function sendPayloadToDeployment( payload )
+    {
+        document.getElementById( 'results_spinner' ).style.display = 'block';
+
+        var deployment_type = "sendtofunction";
+
+        socket.emit( deployment_type, payload );
+    }
+
+    </script>
+
+    <div class="container">
+
+      <header class="sub">
+        <h1>Watson Machine Learning</h1>
+      </header>
+
+      <div class="contents">
+
+        <div class="content">
+
+          <div class="tab_wrap">
+          	<div class="tabs">
+          		<label id="digits_tab" onclick="digits_tab()" onchange='revertImage();'>テンキー</label>
+          		<label id="canvas_tab" onclick="canvas_tab()" onchange='revertImage();'>手書き</label>
+          	</div>
+          </div>
+
+          <div id="calculator">
+
+            <div id="result" class="key">
+            </div>
+
+            <div id="ac" class="key" onclick="clearAll()"><p>AC</p>
+            </div><div id="plusminus" class="key" onclick="convertPM()"><p>+/-</p>
+            </div><div id="percentage" class="key" onclick="convertP()"><p>%</p>
+            </div><div id="divid" class="key" onclick="dividDigit()"><p class="right-side">÷</p>
+            </div><div id="multi" class="key" onclick="multiDigit()"><p class="right-side">×</p>
+            </div><div id="minus" class="key" onclick="minusDigit()"><p class="right-side">-</p>
+            </div><div id="plus" class="key" onclick="plusDigit()"><p class="right-side">+</p>
+            </div><div id="equal" class="key" onclick="equalDigit()"><p class="right-side">=</p></div>
+            <div id="digits">
+              <div id="dot" class="key"onclick="addDot()"><p>.</p>
+              </div><div id="nine" class="key" onclick="getDigit(this)"><p>9</p>
+              </div><div id="eight" class="key" onclick="getDigit(this)"><p>8</p>
+              </div><div id="seven" class="key" onclick="getDigit(this)"><p>7</p>
+              </div><div id="six" class="key" onclick="getDigit(this)"><p>6</p>
+              </div><div id="five" class="key" onclick="getDigit(this)"><p>5</p>
+              </div><div id="four" class="key" onclick="getDigit(this)"><p>4</p>
+              </div><div id="three" class="key" onclick="getDigit(this)"><p>3</p>
+              </div><div id="two" class="key" onclick="getDigit(this)"><p>2</p>
+              </div><div id="one" class="key" onclick="getDigit(this)"><p>1</p>
+              </div><div id="zero" class="key" onclick="getDigit(this)"><p>0</p>
+              </div>
+            </div>
+
+            <div id='canvas_div'>
+              <!-- <h4>Canvas</h4> -->
+              <canvas id='drawing_box'
+                      onmousedown = 'start_drawing(event);'
+                      onmouseup   = 'stop_drawing(event);'
+                      onmouseout  = 'stop_drawing(event);'
+                      onmousemove = 'draw_line(event);'
+                      height="365.5",
+                      width="365.5"
+                      title="Draw a single digit ( 0 - 9 ) here using your mouse">
+              </canvas>
+              <div id="button_box">
+                <button id='submit_button' onclick='submit_drawing();'   title='Submit current drawing for analysis'>Analyze</button>
+                <button id='clear_button'  onclick='clear_everything();' title='Clear drawing and results'>Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <div id='payload_div'>
+            <h4>Generated payload</h4>
+            <pre id='payload_pre'     class='results_pre' ></pre>
+            <div id='payload_spinner' class='spinner'></div>
+          </div>
+
+          <div id='results_div'>
+            <h4>Returned classification</h4>
+            <pre id='results_pre'     class='results_pre'></pre>
+            <div id='results_spinner' class='spinner'></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <footer>
+      </footer>
+
+    </div>
+
+    <%- include("../bottom") %>

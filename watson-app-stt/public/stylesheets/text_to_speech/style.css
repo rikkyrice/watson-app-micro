@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "ibm-plex-sans", 'Helvetica Neue', Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  /* color: #71A4E1; */
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+	height: 100%;
+	max-height: 100%;
+	width: 100%;
+}
+
+header {
+  height: 100px;
+  background-color: #142835;
+  text-align: center;
+}
+.sub {
+  background-color: #71A4E1;
+}
+
+h1 {
+  color: #f4f7fb;
+  font-size: 36px;
+  margin: 0;
+  line-height: 100px;
+}
+
+.contents {
+  width: 100%;
+  /* height: 100%; */
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	overflow: auto;
+	background-color: #ade580;
+	position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.content-log {
+  z-index: 1;
+  flex-basis: 20%;
+}
+.content-audio {
+  z-index: 1;
+  flex-basis: 20%;
+}
+.content-log, .content-audio {
+  color: white;
+  overflow: auto;
+  height: 557px;
+}
+
+audio {
+  width: 100%;
+}
+
+.content {
+  z-index: 1;
+  flex-basis:60%;
+  /* width: 840px; */
+  background-color: #cfe4fc;
+  border-left: 1px solid #142835;
+  border-right: 1px solid #142835;
+}
+#chat-box {
+  width: 100%;
+  height: 557px;
+  overflow: auto;
+}
+#chat-lists li {
+  height: 50px;
+  margin: 0 100px 5px 100px;
+}
+.chat {
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  font-size: 20px;
+  margin: 0;
+  padding: 5px 20px;
+}
+.submit-box {
+  /* position: fixed; */
+  height: 62px;
+  padding: 0 210px;
+}
+.comment-box {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+.voice-recorder {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background:black;
+  cursor: pointer;
+  -webkit-mask-image: url('./../../images/voice_recorder.png');
+  -webkit-mask-size: 24px 24px;
+  margin-right: 10px;
+}
+
+#words {
+  font-size: 25px;
+  border-radius: 10px;
+  border: 1px solid #EEEEEE;
+  background-color: #EEEEEE;
+  margin-right: 10px;
+}
+
+#submit {
+  font-size: 14px;
+  cursor: pointer;
+  height: 20px;
+}
+#clear {
+  font-size: 14px;
+  cursor: pointer;
+  height: 20px;
+  margin-left: 15px;
+}
+
+h4
+{
+font-size: 90%;
+margin: 0px 0px 5px 0px;
+}
+
+#button_box {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  border-left: 1px solid #142835;
+  border-right: 1px solid #142835;
+}
+
+#submit_button
+{
+  cursor: pointer;
+  font-size: 100%;
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;
+  color: #fff;
+  border: solid 1px #668ad8;
+  border-right: solid 1px #142835;
+  /* border-radius: 3px; */
+  width: 100%;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  outline: none;
+  transition: .4s;
+}
+
+#clear_button
+{
+  cursor: pointer;
+  font-size: 100%;
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;
+  color: #fff;
+  border: solid 1px #668ad8;
+  border-left: solid 1px #142835;
+  /* border-radius: 3px; */
+  width: 100%;
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  outline: none;
+  transition: .4s;
+}
+
+#clear_button:hover
+{
+  background: #fff;
+  color: #668ad8;
+}
+#submit_button:hover
+{
+  background: #fff;
+  color: #668ad8;
+}
+
+#results_div
+{
+display: none;
+margin: 0px;
+padding: 0px;
+position: absolute;
+top: 170px;
+left: 700px;
+}
+
+#results_spinner
+{
+margin: 0px;
+padding: 0px;
+position: absolute;
+top: 50px;
+left: 20px;
+}
+
+.results_pre
+{
+background: #f5f5f0;
+border: 1px solid #ccccb3;
+overflow-y: scroll;
+font-family: "Lucida Console", Monaco, monospace;
+font-size: 90%;
+margin: 0px;
+padding: 10px;
+}
+
+#results_pre
+{
+height: 100px;
+width: 200px;
+}
+
+.spinner
+{
+border: 10px solid #ddddbb;
+border-top: 10px solid #3d5c5c;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+animation: spin 2s linear infinite;
+display: none;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+footer {
+  height: 100px;
+  background-color: #142835;
+
+}

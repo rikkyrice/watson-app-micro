@@ -1,0 +1,29 @@
+<%- include("../head") %>
+<div class="container">
+  <header class="sub">
+    <h1>Watsonを知ろう！</h1>
+  </header>
+
+  <div class="contents">
+      <% for(var i=0; i<apis.length-1; i++){ %>
+        <div class="content">
+          <a href="/<%= apis[i].url %>"></a>
+          <div class="logo">
+            <img src="/images/<%= apis[i].img %>">
+            <p><%- apis[i].name %></p>
+          </div>
+        </div>
+      <% } %>
+      <div class="content">
+        <a id="last-href" href="/<%= apis[apis.length-1].url %>"></a>
+        <div class="logo">
+          <img src="/images/<%= apis[apis.length-1].img %>">
+          <p><%- apis[apis.length-1].name %></p>
+        </div>
+      </div>
+  </div>
+
+  <footer>
+  </footer>
+</div>
+<%- include("../bottom") %>

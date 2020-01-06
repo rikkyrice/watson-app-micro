@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href="/sample_site/stylesheets/style.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/sample_site/javascripts/javascript.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+  </head>
+  <body>
+    <script>
+      //var socket = io.connect( 'https://app-name.mybluemix.net/' );
+      var socket = io.connect();
+
+      socket.on( 'vrResult', vrResultHandler );
+
+      var files = [];
+      var objectURL;
+
+      function sendData(){
+        if(files.length == 0){
+          alert('ファイルを選択してください！');
+        }else{
+          $('#dnd_page').css('display', 'none');
+          $('#result_page').css('display', 'block')
+
+          document.getElementById( 'results_spinner' ).style.display = 'block';
+
+          for(var i=0; i<files.length; i++){
+            socket.emit( 'recognizeVisual', files[i] );
+          }
+          initResultsList();
+        }
+      }
+
+    </script>
+<div class="container">
+  <header class="sub">
+    <h1>Update Your GEARS</h1>
+    <ul class="ul-menus">
+      <li class="li-menu try" onclick="openTry()">TRY</li>
+      <li class="li-menu inst" onclick="openInstruction()">INSTRUCTION</li>
+      <li class="li-menu fv" onclick="openFutureVision()">CONCEPT</li>
+    </ul>
+  </header>
+
+  <div class="contents">
+    <!-- <div class="content-log">
+      <h2>Log</h2>
+      <pre id="log"></pre>
+    </div> -->
+
+    <div id="try">
+      <div id="dnd_page">
+        <div class="dnd-border-p" ondragover="onDragOver(event)" ondrop="onDrop(event)" ondragleave="onDragLeave(event)">
+          <div class="dnd-border-c">
+            <div class="dnd-text">
+              <p id="dnd-inst">ここにファイルをドロップ</p>
+              <p id="dnd-brws">または<span onclick="fileOpen()">ここ</span>をクリックしてファイルを選択する。<span onclick="fileClear()">クリア</span></p>
+              <button id="submit" onclick="sendData();">Send to Watson</button>
+              <input id="files" type="file" name="files[]" onchange="handleFileSelect(this.files)" multiple>
+            </div>
+            <div id="disp" ></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="result_page">
+        <div class="bg-mask">
+          <div id="result_list_page">
+            <span onclick="returnPage()" id="return_page"><< 選択し直す</span>
+            <span onclick="returnResult()" id="return_result"><< 戻る</span>
+            <h2>Results</h2>
+            <div id="lists">
+              <div id='results_spinner' class='spinner'></div>
+              <ul id="results">
+              </ul>
+            </div>
+            <div id="link">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="instruction">
+      <div id="arrow-left" class="arrow" onclick="goLeft()"></div>
+      <div id="arrow-right" class="arrow" onclick="goRight()"></div>
+      <div id="slider">
+        <div class="slide inst_1">
+          <p class="p-1" style="color: red;">使い方の説明です. 実際に試すにはTryを押してください.</p>
+          <p class="p-2">1. あなたの部屋,またはアップデートしたい物の写真を撮ってください.</p>
+        </div>
+        <div class="slide inst_2">
+          <p class="p-1">2. ファイルを選択するか, ドラッグ&ドロップしてください. ファイルは複数選択できます.</p>
+        </div>
+        <div class="slide inst_3">
+          <p class="p-1">3. 選択したファイルを<a href="https://www.ibm.com/watson/jp-ja/" target="_blank">IBM Watson</a>に送ります.</p>
+        </div>
+        <div class="slide inst_4">
+          <p class="p-1">4. Visual Recognitionで解析された結果が表示されます.</p>
+          <p class="p-2">5. 家具名を選択すると, 各家具の検索が行えます.</p>
+          <p class="p-3">6. やり直す場合はブラウザバックは使わず, <span><<選択し直す</span>を押してください.</p>
+        </div>
+        <div class="slide inst_5">
+          <p class="p-1">7. リンクに飛んでUpdateしましょう!</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="future_vision">
+      <div class="explain">
+        <h2>CONCEPT</h2>
+        <h3>UPDATE YOUR GEARS.</h3>
+        <p>あなたの部屋はバージョンいくつですか？<br>Watsonを使ってアップデートしよう！</p>
+      </div>
+      <div class="explain">
+        <h2>EXPLAIN</h2>
+        <ul>
+          <li>架空のECサイトに対してWatson Visual Recognitionの活用を想定したものです.</li>
+          <li>部屋にある家具などを細かく識別できるように,写真を繰り返し分割してそれぞれでVisual Recognitionによる解析結果を取得しています.</li>
+          <li>結果はスコアによって表示され, 0.7以下は表示されません.</li>
+          <li>全ての解析結果を結合し,降順で家具リストが表示されます.</li>
+        </ul>
+      </div>
+      <div class="explain">
+        <h2>FUTURE VISION</h2>
+        <ul>
+          <li>今回はAmazonや楽天へのリンクを貼ってあるが, 自社製品のマーケティングができるようにする.</li>
+          <li>データベースを活かし, 男性部屋, 女性部屋の傾向を知ることで, お勧め商品などのマーケティングに活かす.</li>
+          <li>細かい分割写真から全く別の物が識別されることがあるため, 写真によって細かさを指定する.</li>
+          <li>家具だけでなく細かい小物の識別ができるようにする.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+  </footer>
+</div>
+<%- include("../bottom") %>
