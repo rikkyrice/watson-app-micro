@@ -16,7 +16,7 @@ exports.dogcat_judge = function(req, res){
     version: '2019-12-06',
     authenticator: new IamAuthenticator({ apikey: '' }),
   });
-
+  // console.log(JSON.stringify(req.file,null,2));
   var params = {
     imagesFile: fs.createReadStream(req.file.path),
     // owners: ['me'],
@@ -27,7 +27,8 @@ exports.dogcat_judge = function(req, res){
   visual_recognition.classify(params)
     .then(response => {
       const results = {class: response.result.images[0].classifiers[0].classes[0].class,
-                      score: response.result.images[0].classifiers[0].classes[0].score};
+                      score: response.result.images[0].classifiers[0].classes[0].score,
+                    };
       console.log(results);
       const result = querystring.stringify(results);
       res.redirect('/visual_recognition/dogcat?' + result);

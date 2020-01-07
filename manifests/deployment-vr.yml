@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: watson-app-vr
-        image: rikkyrice/watson-app-vr:0.9
+        image: rikkyrice/watson-app-vr:
         ports:
         - containerPort: 8080
 ---

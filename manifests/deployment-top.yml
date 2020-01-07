@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: watson-app-top
-        image: rikkyrice/watson-app-top:0.9
+        image: rikkyrice/watson-app-top:
         ports:
         - containerPort: 8080
 ---

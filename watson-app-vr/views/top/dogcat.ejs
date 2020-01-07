@@ -5,20 +5,26 @@
   </header>
 
   <div class="main-contents">
-    <div class="sub-content">
-      <form method="post" action="/visual_recognition/dogcat/dogcat_judge" enctype="multipart/form-data">
-        <input type="file" name="upload_file">
-        <input type="submit" value="判定">
-      </form>
-      <% if(results){ %>
-        <p>解析結果</p>
-        <p>判定: <%= results.class %></p>
-        <p>スコア: <%= results.score %></p>
+    <div class="sub-content-vr">
+      <div class="content-vr">
+        <h2>犬・猫判定システム</h2>
+        <form method="post" action="/visual_recognition/dogcat/dogcat_judge" enctype="multipart/form-data">
+          <input type="file" name="upload_file">
+          <input type="submit" value="判定">
+        </form>
+      </div>
+      <% if(results['class']){ %>
+        <div class="result-vr">
+            <h2>解析結果</h2>
+            <p>判定: <%= results.class %></p>
+            <p class="score-p">スコア: </p><div class="score-div" style="width:<%= results.score*600 %>px;"></div>
+            <p class="score-p-num"><%= results.score %></p>
+        </div>
       <% } %>
     </div>
   </div>
 
-  <footer class="sub">
+  <footer>
   </footer>
 </div>
 <%- include("../bottom") %>
